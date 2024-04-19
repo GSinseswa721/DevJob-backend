@@ -1,34 +1,39 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// // This is your Prisma schema file,
+// // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+// // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
-generator client {
-  provider = "prisma-client-js"
-  output   = "@prisma/client"
-  clientEngineType = "binary"
-}
+// generator client {
+//   provider = "prisma-client-js"
+//   output   = "@prisma/client"
+//   clientEngineType = "binary"
+// }
 
+// datasource db {
+//   provider = "postgresql"
+//   url      = env("DATABASE_URL")
+// }
+
+// model User {
+//   id      Int      @id @default(autoincrement())
+//   email   String   @unique
+//   username    String
+//   password    String
+
+// }
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-model User{
-  id String @id @default(uuid())
-  name String
-  email String
-  isAdmin Boolean
-  blogs Blog[]
+
+generator client {
+  provider = "prisma-client-js"
+}
+model User {
+  id      Int      @id @default(autoincrement())
+  email   String   
+  username    String
+  password    String
 }
 
-model Blog{
-   id String @id @default(uuid())
-  createAt DateTime
-  title String
-  content String
-  image Bytes
-  author User  @relation(fields: [authorId], references: [id])
-  authorId String
-
-}
